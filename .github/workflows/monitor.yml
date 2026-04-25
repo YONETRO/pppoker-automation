@@ -2,7 +2,7 @@ name: PPPoker Monitor - Cronjob cada 10 min
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # cada 10 minutos
+    - cron: '*/15 * * * *'  # cada 15 minutos
   workflow_dispatch:          # correr manualmente desde GitHub
 
 jobs:

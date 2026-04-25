@@ -41,6 +41,10 @@ When('hace click en el boton Chip Out', async () => {
     await browser.pause(3000);
 });
 
+Then('la pagina sigue en {string}', async (path: string) => {
+    await expect(browser).toHaveUrl(expect.stringContaining(path));
+});
+
 Then('la URL contiene {string}', async (path: string) => {
     await browser.waitUntil(
         async () => (await browser.getUrl()).includes(path),
@@ -64,7 +68,8 @@ When('ingresa la cantidad de fichas {string}', async (cantidad: string) => {
 });
 
 When('confirma el envio', async () => {
-    await PPPokerPage.btnConfirmar.click();
+    await PPPokerPage.btnConfirmarChipIn.waitForExist({ timeout: 5000 });
+    await PPPokerPage.btnConfirmarChipIn.click();
 });
 
 Then('la web muestra el estado {string}', async (estado: string) => {
@@ -105,7 +110,8 @@ When('ingresa la cantidad de fichas {string} a retirar', async (cantidad: string
 });
 
 When('confirma la operacion', async () => {
-    await PPPokerPage.btnConfirmar.click();
+    await PPPokerPage.btnConfirmarChipOut.waitForExist({ timeout: 5000 });
+    await PPPokerPage.btnConfirmarChipOut.click();
 });
 
 Then('el saldo del usuario en la web disminuye en {string} fichas', async (cantidad: string) => {
