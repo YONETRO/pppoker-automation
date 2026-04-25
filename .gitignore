@@ -2,3 +2,4 @@ node_modules/
 .wdio-snapshot-failure*
 logs/
 *.log
+.env

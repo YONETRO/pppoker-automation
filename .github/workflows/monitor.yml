@@ -1,0 +1,43 @@
+name: PPPoker Monitor - Cronjob cada 10 min
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # cada 10 minutos
+  workflow_dispatch:          # correr manualmente desde GitHub
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Instalar Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Correr pruebas de monitoreo
+        env:
+          PPPOKER_EMAIL: ${{ secrets.PPPOKER_EMAIL }}
+          PPPOKER_PASSWORD: ${{ secrets.PPPOKER_PASSWORD }}
+          HEADLESS: 'true'
+        run: npx wdio run wdio.conf.ts --spec features/PPPoker.feature
+
+      - name: Subir reporte en caso de fallo
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wdio-report-${{ github.run_number }}
+          path: |
+            logs/
+            .wdio-snapshot-failure*/
+          retention-days: 5
