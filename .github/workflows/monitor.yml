@@ -25,7 +25,7 @@ jobs:
       - name: Instalar Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Correr pruebas de monitoreo
+      - name: Correr pruebas de monitoreo (tags: @navegacion @chipIn @chipOut)
         env:
           PPPOKER_EMAIL: ${{ secrets.PPPOKER_EMAIL }}
           PPPOKER_PASSWORD: ${{ secrets.PPPOKER_PASSWORD }}
