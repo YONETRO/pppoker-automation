@@ -12,6 +12,7 @@
     "js-yaml": "^4.1.1"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+    "test": "wdio run wdio.conf.ts --spec features/PPPoker.feature --cucumberOpts.tagExpression=\"@navegacion or @chipIn or @chipOut\"",
+    "monitor": "wdio run wdio.conf.ts --spec features/PPPoker.feature --cucumberOpts.tagExpression=\"@navegacion or @chipIn or @chipOut\""
   }
 }
