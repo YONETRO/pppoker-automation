@@ -2,7 +2,7 @@ import { Given, When, Then, Before } from '@wdio/cucumber-framework';
 import { expect, browser, $ } from '@wdio/globals';
 import PPPokerLoginPage from '../pageobjects/pppoker.login.page.js';
 import PPPokerPage from '../pageobjects/pppoker.page.js';
-import { URL, TIMEOUT } from '../utils/constants.js';
+import { TIMEOUT } from '../utils/constants.js';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -41,8 +41,9 @@ When('hace click en el boton Chip Out', async () => {
     await btnOut.click();
 });
 
-Then('el formulario de fichas esta visible', async () => {
-    await PPPokerPage.inputCantidad.waitForExist({ timeout: TIMEOUT.SHORT });
+Then('el modo activo es {string}', async (modo: string) => {
+    const selector = modo === 'Chip In' ? 'button.modo-btn.active-in-falso' : 'button.modo-btn.active-out-falso';
+    await $(selector).waitForExist({ timeout: TIMEOUT.SHORT });
 });
 
 Given('el usuario se encuentra en la seccion de chip in', async () => {

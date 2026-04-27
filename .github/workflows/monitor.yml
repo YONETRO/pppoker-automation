@@ -30,4 +30,4 @@ jobs:
           PPPOKER_EMAIL: ${{ secrets.PPPOKER_EMAIL }}
           PPPOKER_PASSWORD: ${{ secrets.PPPOKER_PASSWORD }}
           HEADLESS: 'true'
-        run: npx wdio run wdio.conf.ts --spec features/PPPoker.feature
+        run: npm test

@@ -3,12 +3,12 @@ Feature: Flujo end to end de chip in y chip out en PPPoker Manager
   @navegacion
   Scenario: Navegar a la seccion Chip In
     When hace click en el boton Chip In
-    Then el formulario de fichas esta visible
+    Then el modo activo es "Chip In"
 
   @navegacion
   Scenario: Navegar a la seccion Chip Out
     When hace click en el boton Chip Out
-    Then el formulario de fichas esta visible
+    Then el modo activo es "Chip Out"
 
   @pending
   Scenario: Chip in exitoso desde la web
